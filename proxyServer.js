@@ -9,10 +9,10 @@ const { getImgurData, assembleResponse } = require('./imgurHandler');
 let clientRedirectUri = 'apollo://oauth';
 
 function startProxyServer(port) {
-    const allowedHosts = ['www.reddit.com', 'oauth.reddit.com', 'apollogur.download'];
+    const allowedHosts = ['www.reddit.com', 'oauth.reddit.com', 'ssl.reddit.com', 'apollogur.download'];
 
     const options = {
-        target: 'http://localhost/',
+        target: 'http://example.com/',
         changeOrigin: true,
         ws: true,
         ssl: {
@@ -38,7 +38,7 @@ function startProxyServer(port) {
         if (shouldChangeUserAgent) {
             modifiedRequest = true;
             //proxyReq.setHeader('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0');
-            proxyReq.setHeader('User-Agent', process.env.CLIENT_ID);
+            proxyReq.setHeader('User-Agent', process.env.USER_AGENT);
         }
 
         if (reqUrl.pathname === '/api/v1/access_token') {
@@ -53,7 +53,7 @@ function startProxyServer(port) {
         console.log(new Date(), "proxy <", proxyRes.statusCode, req.url);
         const reqUrl = new url.URL(req.url, `https://${req.headers.host}`);
     
-        if ((reqUrl.pathname === '/svc/shreddit/oauth-grant' || reqUrl.pathname === '/api/v1/authorize')&& proxyRes.statusCode === 302) {
+        if ((reqUrl.pathname === '/svc/shreddit/oauth-grant' || reqUrl.pathname === '/api/v1/authorize')&& proxyRes.statusCode === 303) {
             proxyRes.pipe = function() {};
             
             const locationUrl = new url.URL(proxyRes.headers.location);

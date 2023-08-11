@@ -16,11 +16,11 @@ function startWebServer(port, directory) {
 
 
 
-    // app.get('/redirect', function(req, res) {
-    //   const query = new URLSearchParams(req.query);
-    //   const redirectUrl = `apollo://reddit-oauth?${query.toString()}`;
-    //   res.redirect(302, redirectUrl);
-    // });
+    app.get('/redirect', function(req, res) {
+      const query = new URLSearchParams(req.query);
+      const redirectUrl = `apollo://reddit-oauth?${query.toString()}`;
+      res.redirect(302, redirectUrl);
+    });
     
     app.use(express.static(directory));
     let httpServer = http.createServer(app);
