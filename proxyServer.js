@@ -9,7 +9,7 @@ const { getImgurData, assembleResponse } = require('./imgurHandler');
 let clientRedirectUri = 'apollo://oauth';
 
 function startProxyServer(port) {
-    const allowedHosts = ['www.reddit.com', 'oauth.reddit.com', 'ssl.reddit.com', 'apollogur.download'];
+    const allowedHosts = ['apollogur.download'];
 
     const options = {
         target: 'http://example.com/',
@@ -94,7 +94,7 @@ function startProxyServer(port) {
         const reqUrl = new url.URL(req.url, `https://${req.headers.host}`);
         const isAccessTokenRequest = reqUrl.pathname === '/api/v1/access_token';
 
-        if (!req.headers.host || !allowedHosts.includes(req.headers.host)) {
+        if (!req.headers.host || !allowedHosts.includes(req.headers.host) || !req.headers.host.endsWith('reddit.com')) {
             res.writeHead(403, { 'Content-Type': 'text/plain' });
             res.end(`Host ${req.headers.host} is not allowed`);
             console.log(new Date(), "proxy 🚫 ", req.method, req.url);
