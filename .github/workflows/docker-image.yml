@@ -31,3 +31,4 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository }}:${{ github.sha }}
             ghcr.io/${{ github.repository }}:latest
+          platforms: linux/amd64,linux/arm64
