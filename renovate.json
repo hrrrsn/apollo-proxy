@@ -5,9 +5,16 @@
   ],
   "packageRules": [
     {
-      "matchDatasources": ["docker", "npm"],
+      "matchDatasources": ["docker"],
       "automerge": true,
       "ignoreTests": true
+    },
+    {
+      "matchPackageNames": ["npm"],
+      "automerge": true,
+      "ignoreTests": true,
+      "groupName": "npm dependencies"
     }
+
   ]
 }
