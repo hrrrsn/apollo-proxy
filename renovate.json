@@ -10,7 +10,7 @@
       "ignoreTests": true
     },
     {
-      "matchPackageNames": ["npm"],
+      "matchManagers": ["npm"],
       "automerge": true,
       "ignoreTests": true,
       "groupName": "npm dependencies"
