@@ -1,4 +1,4 @@
-FROM node:22.13.0-slim@sha256:005e4c1b9ef0007ad2b67beb81a9c99d47216f2dd3902dcc2033b26c122442dc
+FROM node:22.13.0-slim@sha256:1264cf5b74c171fbd6af6f15027e224c0819c3338585dad37011efc395c6b7fc
 WORKDIR /app
 
 COPY package*.json ./
